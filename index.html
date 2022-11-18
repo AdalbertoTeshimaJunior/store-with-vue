@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <title>Loja</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="nav-bar"></div>
+
+    <div id="page">
+      <major-pages
+        @change-page-selected="changePageSelected"
+        :cart="cart"
+      ></major-pages>
+
+      <major-store
+        @update-cart="updateCart"
+        :page-selected="pageSelected"
+      ></major-store>
+
+      <major-payment
+        :page-selected="pageSelected"
+        :cart="cart"
+      ></major-payment>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="src/pages.js"></script>
+    <script src="src/store.js"></script>
+    <script src="src/payment.js"></script>
+    <!--<script src="/dist/build.js"></script> -->
+
+    <script>
+      var page = new Vue({
+        el: "#page",
+        data: {
+          cart: [],
+          pageSelected: "Store"
+        },
+        methods: {
+          updateCart(cart) {
+            this.cart = cart;
+          },
+          changePageSelected(page) {
+            this.pageSelected = page;
+          }
+        }
+      });
+    </script>
+
+  </body>
+</html>
